@@ -25,6 +25,7 @@
     background-color: gray;
     border-radius: 5px;
     padding: 10px;
+    color: white;
 }
 
 .calculator {
@@ -55,6 +56,7 @@
     flex: 1;
     border-radius: 5px;
     font-size: 22px;
+    color: white;
 }
 
 button.button.normal-btn.btn-0 {
@@ -62,4 +64,15 @@ button.button.normal-btn.btn-0 {
     flex: 2;
 }
 
+.operator-btn {
+    background-color: rgb(255, 107, 107);
+}
+
+.special-btn {
+    background-color:rgb(59, 206, 206)
+}
+
+.normal-btn {
+    background-color: gray;
+}
 
