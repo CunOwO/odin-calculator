@@ -16,22 +16,22 @@
 }
 
 .screen {
-    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: end;
     align-items: end;
     font-size: 50px;
-    height: 190px;
+    height: 145px;
     background-color: gray;
     border-radius: 5px;
+    padding: 10px;
 }
 
 .calculator {
     display: flex;
     flex-direction: column;
     width: 360px;
-    height: 570px;
+    height: 580px;
     background-color:black;
     padding: 20px;
     gap: 20px;
@@ -54,7 +54,7 @@
 .button-row .button {
     flex: 1;
     border-radius: 5px;
-    font-size: 25px;
+    font-size: 22px;
 }
 
 button.button.normal-btn.btn-0 {
