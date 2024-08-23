@@ -17,7 +17,6 @@
 
 .screen {
     display: flex;
-    flex-direction: column;
     justify-content: end;
     align-items: end;
     font-size: 50px;
@@ -59,7 +58,7 @@
     color: white;
 }
 
-button.button.normal-btn.btn-0 {
+button.button.num-btn.btn-0 {
     padding: 4.75px;
     flex: 2;
 }
@@ -72,7 +71,8 @@ button.button.normal-btn.btn-0 {
     background-color:rgb(59, 206, 206)
 }
 
-.normal-btn {
+.num-btn,
+.btn-decimal {
     background-color: gray;
 }
 
