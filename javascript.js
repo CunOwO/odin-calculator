@@ -2,6 +2,7 @@ const numBtn = document.querySelectorAll(".num-btn");
 const span = document.querySelector("span");
 const operatorBtn = document.querySelector(".button-container");
 const clearBtn = document.querySelector(".btn-clear");
+const signChangeBtn = document.querySelector(".btn-sign-change");
 
 let currentNumber = 0;
 let currentResult = 0;
@@ -16,6 +17,12 @@ clearBtn.addEventListener("click", () => {
     input = "";
     previousOperation = null;
     span.textContent = 0;
+});
+
+signChangeBtn.addEventListener("click", () => {
+    currentNumber = Number(span.textContent) * (-1);
+    input = currentNumber;
+    span.textContent = currentNumber; 
 });
 
 operatorBtn.addEventListener("click", (e) => {
