@@ -3,6 +3,7 @@ const span = document.querySelector("span");
 const operatorBtn = document.querySelector(".button-container");
 const clearBtn = document.querySelector(".btn-clear");
 const signChangeBtn = document.querySelector(".btn-sign-change");
+const percentBtn = document.querySelector(".btn-percent");
 
 let currentNumber = 0;
 let currentResult = 0;
@@ -21,6 +22,12 @@ clearBtn.addEventListener("click", () => {
 
 signChangeBtn.addEventListener("click", () => {
     currentNumber = Number(span.textContent) * (-1);
+    input = currentNumber;
+    span.textContent = currentNumber; 
+});
+
+percentBtn.addEventListener("click", () => {
+    currentNumber = Number(span.textContent) / 100;
     input = currentNumber;
     span.textContent = currentNumber; 
 });
