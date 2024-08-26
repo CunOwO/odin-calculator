@@ -4,11 +4,13 @@ const operatorBtn = document.querySelector(".button-container");
 const clearBtn = document.querySelector(".btn-clear");
 const signChangeBtn = document.querySelector(".btn-sign-change");
 const percentBtn = document.querySelector(".btn-percent");
+const decimalBtn = document.querySelector(".btn-decimal");
 
 let currentNumber = 0;
 let currentResult = 0;
 let input = "";
 let previousOperation = null;
+let decimalPointCount = 0;
 
 numBtn.forEach((button) => button.addEventListener("click", updateScreen));
 
@@ -18,10 +20,21 @@ signChangeBtn.addEventListener("click", toggleSign);
 
 percentBtn.addEventListener("click", calculatePercentage);
 
+decimalBtn.addEventListener("click", updateScreen);
+
 operatorBtn.addEventListener("click", handleOperatorClick);
 
 function updateScreen(e) {
+    if (e.target.textContent === ".") {
+        decimalPointCount++;
+    }
+
+    if (decimalPointCount > 0) {
+        decimalBtn.disabled = true;
+    }
+
     input += e.target.textContent;
+
     span.textContent = input;
     
     if (!span.style.fontSize) {
@@ -38,6 +51,8 @@ function clear() {
     input = "";
     previousOperation = null;
     span.textContent = 0;
+    decimalPointCount = 0;
+    decimalBtn.disabled = false;
 }
 
 function toggleSign() {
@@ -72,6 +87,8 @@ function handleOperatorClick(e) {
 }
 
 function handleOperation(operation) {
+    decimalPointCount = 0;
+    decimalBtn.disabled = false;
 
     // Reset if "=" was pressed and input is not empty (start a new calculation)
     if (previousOperation === "equals" && input !== "") {
