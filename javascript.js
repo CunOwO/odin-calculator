@@ -12,25 +12,11 @@ let previousOperation = null;
 
 numBtn.forEach((button) => button.addEventListener("click", updateScreen));
 
-clearBtn.addEventListener("click", () => {
-    currentNumber = 0;
-    currentResult = 0;
-    input = "";
-    previousOperation = null;
-    span.textContent = 0;
-});
+clearBtn.addEventListener("click", clear);
 
-signChangeBtn.addEventListener("click", () => {
-    currentNumber = Number(span.textContent) * (-1);
-    input = currentNumber;
-    span.textContent = currentNumber; 
-});
+signChangeBtn.addEventListener("click", changeSign);
 
-percentBtn.addEventListener("click", () => {
-    currentNumber = Number(span.textContent) / 100;
-    input = currentNumber;
-    span.textContent = currentNumber; 
-});
+percentBtn.addEventListener("click", calculatePercentage);
 
 operatorBtn.addEventListener("click", (e) => {
     let target = e.target;
@@ -69,7 +55,10 @@ function handleOperation(operation) {
     if (input !== "") {
         currentNumber = Number(input);
         currentResult = calculate(currentResult, currentNumber, previousOperation);
-        currentResult = +(Math.round(currentResult + "e+2")  + "e-2");
+
+        if (typeof currentResult === "number") {
+            currentResult = +(Math.round(currentResult + "e+2")  + "e-2");
+        }
         
         span.textContent = currentResult;
         input = "";
@@ -86,7 +75,7 @@ function calculate(operand1, operand2, operation) {
         case "multiply":
             return operand1 * operand2;
         case "divide":
-            return operand1 / operand2;
+            return operand2 === 0 ? "Seriously bro?" : (operand1 / operand2);
         default:
             return operand2;
     }
@@ -104,3 +93,22 @@ function updateScreen(e) {
     }
 }
 
+function clear() {
+    currentNumber = 0;
+    currentResult = 0;
+    input = "";
+    previousOperation = null;
+    span.textContent = 0;
+}
+
+function changeSign() {
+    currentNumber = Number(span.textContent) * (-1);
+    input = currentNumber;
+    span.textContent = currentNumber; 
+}
+
+function calculatePercentage() {
+    currentNumber = Number(span.textContent) / 100;
+    input = currentNumber;
+    span.textContent = currentNumber; 
+}
