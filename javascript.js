@@ -14,11 +14,45 @@ numBtn.forEach((button) => button.addEventListener("click", updateScreen));
 
 clearBtn.addEventListener("click", clear);
 
-signChangeBtn.addEventListener("click", changeSign);
+signChangeBtn.addEventListener("click", toggleSign);
 
 percentBtn.addEventListener("click", calculatePercentage);
 
-operatorBtn.addEventListener("click", (e) => {
+operatorBtn.addEventListener("click", handleOperatorClick);
+
+function updateScreen(e) {
+    input += e.target.textContent;
+    span.textContent = input;
+    
+    if (!span.style.fontSize) {
+        span.style.fontSize = window.getComputedStyle(span).fontSize;
+    }
+    if (span.offsetWidth > 297) {
+        span.style.fontSize = (parseInt(span.style.fontSize) * 0.9) + "px";
+    }
+}
+
+function clear() {
+    currentNumber = 0;
+    currentResult = 0;
+    input = "";
+    previousOperation = null;
+    span.textContent = 0;
+}
+
+function toggleSign() {
+    currentNumber = Number(span.textContent) * (-1);
+    input = currentNumber;
+    span.textContent = currentNumber; 
+}
+
+function calculatePercentage() {
+    currentNumber = Number(span.textContent) / 100;
+    input = currentNumber;
+    span.textContent = currentNumber; 
+}
+
+function handleOperatorClick(e) {
     let target = e.target;
     if (target.classList.contains("btn-add")) {
         handleOperation("add");
@@ -35,7 +69,7 @@ operatorBtn.addEventListener("click", (e) => {
     else if (target.classList.contains("btn-equals")) {
         handleOperation("equals");
     }
-});
+}
 
 function handleOperation(operation) {
 
@@ -79,36 +113,4 @@ function calculate(operand1, operand2, operation) {
         default:
             return operand2;
     }
-}
-
-function updateScreen(e) {
-    input += e.target.textContent;
-    span.textContent = input;
-    
-    if (!span.style.fontSize) {
-        span.style.fontSize = window.getComputedStyle(span).fontSize;
-    }
-    if (span.offsetWidth > 297) {
-        span.style.fontSize = (parseInt(span.style.fontSize) * 0.9) + "px";
-    }
-}
-
-function clear() {
-    currentNumber = 0;
-    currentResult = 0;
-    input = "";
-    previousOperation = null;
-    span.textContent = 0;
-}
-
-function changeSign() {
-    currentNumber = Number(span.textContent) * (-1);
-    input = currentNumber;
-    span.textContent = currentNumber; 
-}
-
-function calculatePercentage() {
-    currentNumber = Number(span.textContent) / 100;
-    input = currentNumber;
-    span.textContent = currentNumber; 
 }
