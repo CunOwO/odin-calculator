@@ -1,12 +1,22 @@
 const numBtn = document.querySelectorAll(".num-btn");
 const span = document.querySelector("span");
 const operatorBtn = document.querySelector(".button-container");
+const clearBtn = document.querySelector(".btn-clear");
+
 let currentNumber = 0;
 let currentResult = 0;
 let input = "";
 let previousOperation = null;
 
 numBtn.forEach((button) => button.addEventListener("click", updateScreen));
+
+clearBtn.addEventListener("click", () => {
+    currentNumber = 0;
+    currentResult = 0;
+    input = "";
+    previousOperation = null;
+    span.textContent = 0;
+});
 
 operatorBtn.addEventListener("click", (e) => {
     let target = e.target;
