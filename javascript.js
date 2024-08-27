@@ -35,6 +35,11 @@ function updateScreen(e) {
 
     input += e.target.textContent;
 
+    // Display "0.xxxx" instead of ".xxxx" when it's "0"
+    if (input.at(0) === ".") {
+        input = "0" + input;
+    }
+
     span.textContent = input;
     
     if (!span.style.fontSize) {
@@ -56,12 +61,20 @@ function clear() {
 }
 
 function toggleSign() {
+    // Do nothing when it's "0"
+    if (Number(span.textContent) === 0) {
+        return;
+    }
     currentNumber = Number(span.textContent) * (-1);
     input = currentNumber;
     span.textContent = currentNumber; 
 }
 
 function calculatePercentage() {
+    // Do nothing when it's "0"
+    if (Number(span.textContent) === 0) {
+        return;
+    }
     currentNumber = Number(span.textContent) / 100;
     input = currentNumber;
     span.textContent = currentNumber; 
@@ -107,7 +120,8 @@ function handleOperation(operation) {
         currentNumber = Number(input);
         currentResult = calculate(currentResult, currentNumber, previousOperation);
 
-        if (typeof currentResult === "number") {
+        // Only round the result, not every input
+        if (typeof currentResult === "number" && previousOperation != null) {
             currentResult = +(Math.round(currentResult + "e+2")  + "e-2");
         }
         
