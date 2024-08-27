@@ -21,10 +21,14 @@
     align-items: end;
     font-size: 50px;
     height: 145px;
-    background-color: gray;
+    background-color: rgb(128, 128, 128);
     border-radius: 5px;
     padding: 10px;
-    color: white;
+    color: rgb(255, 255, 255);
+}
+
+span {
+    overflow-x: auto;
 }
 
 .calculator {
@@ -32,7 +36,7 @@
     flex-direction: column;
     width: 360px;
     height: 580px;
-    background-color:black;
+    background-color:rgb(0, 0, 0);
     padding: 20px;
     gap: 20px;
     border-radius: 4%;
@@ -55,7 +59,7 @@
     flex: 1;
     border-radius: 5px;
     font-size: 22px;
-    color: white;
+    color: rgb(255, 255, 255);
 }
 
 button.button.num-btn.btn-0 {
@@ -67,12 +71,32 @@ button.button.num-btn.btn-0 {
     background-color: rgb(255, 107, 107);
 }
 
+.operator-btn:focus {
+    background-color: rgb(248, 153, 153);
+}
+
 .special-btn {
     background-color:rgb(59, 206, 206)
 }
 
-.num-btn,
-.btn-decimal {
-    background-color: gray;
+.special-btn:active {
+    background-color:rgb(160, 245, 245)
 }
 
+.num-btn,
+.btn-decimal {
+    background-color: rgb(128, 128, 128);
+}
+
+.num-btn:active,
+.btn-decimal:active {
+    background-color: rgb(182, 181, 181);
+}
+
+button.button.btn-equals {
+    background-color: rgb(255, 107, 107);
+}
+
+button.button.btn-equals:active {
+    background-color: rgb(248, 153, 153);
+}

@@ -40,13 +40,11 @@ function updateScreen(e) {
         input = "0" + input;
     }
 
-    span.textContent = input;
-    
-    if (!span.style.fontSize) {
-        span.style.fontSize = window.getComputedStyle(span).fontSize;
+    if (isSafeNumber(input)) {
+        span.textContent = input;
     }
-    if (span.offsetWidth > 297) {
-        span.style.fontSize = (parseInt(span.style.fontSize) * 0.9) + "px";
+    else {
+        span.textContent = "Too long!";
     }
 }
 
@@ -61,6 +59,10 @@ function clear() {
 }
 
 function toggleSign() {
+    if (span.textContent === "Too long!") {
+        clear();
+    }
+
     // Do nothing when it's "0"
     if (Number(span.textContent) === 0) {
         return;
@@ -71,6 +73,10 @@ function toggleSign() {
 }
 
 function calculatePercentage() {
+    if (span.textContent === "Too long!") {
+        clear();
+    }
+
     // Do nothing when it's "0"
     if (Number(span.textContent) === 0) {
         return;
@@ -103,6 +109,10 @@ function handleOperation(operation) {
     decimalPointCount = 0;
     decimalBtn.disabled = false;
 
+    if (span.textContent ==="Seriously bro?" || span.textContent === "Too long!" || span.textContent === "-Infinity" || span.textContent === "Infinity") {
+        clear();
+    }
+
     // Reset if "=" was pressed and input is not empty (start a new calculation)
     if (previousOperation === "equals" && input !== "") {
         currentResult = 0;
@@ -120,9 +130,23 @@ function handleOperation(operation) {
         currentNumber = Number(input);
         currentResult = calculate(currentResult, currentNumber, previousOperation);
 
+        if (!isSafeNumber(currentResult)) {
+            if (currentResult > 0) {
+                span.textContent = "Infinity";
+            }
+            else {
+                span.textContent = "-Infinity";
+            }
+            return;
+        }
+
         // Only round the result, not every input
         if (typeof currentResult === "number" && previousOperation != null) {
-            currentResult = +(Math.round(currentResult + "e+2")  + "e-2");
+            currentResult = Number(Math.round(currentResult + "e+2")  + "e-2");
+
+            if (currentResult.toString().length > 10) {
+                currentResult = currentResult.toExponential(2);
+            }
         }
         
         span.textContent = currentResult;
@@ -144,4 +168,12 @@ function calculate(operand1, operand2, operation) {
         default:
             return operand2;
     }
+}
+
+function isSafeNumber(input) {
+    let number = Number(input);
+    if (number < Number.MIN_SAFE_INTEGER || number > Number.MAX_SAFE_INTEGER) {
+        return false;
+    }
+    return true;
 }
